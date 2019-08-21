@@ -1,0 +1,11 @@
+{
+    "name": "creativestyle/magesuite-coding-standards",
+    "description": "A set of MageSuite specific PHP CodeSniffer rules.",
+    "type": "phpcodesniffer-standard",
+    "homepage": "https://creativestyle.de",
+    "license": "OSL-3.0",
+    "require": {
+        "squizlabs/php_codesniffer": "~3.4.0",
+        "magento/magento-coding-standard": "4"
+    }
+}

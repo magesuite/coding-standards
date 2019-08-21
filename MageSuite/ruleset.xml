@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<ruleset name="MageSuite">
+    <description>Custom MageSuite coding standard.</description>
+    <exclude-pattern>vendor\/(?!creativestyle\/).*</exclude-pattern>
+
+    <rule ref="../../../../vendor/magento/magento-coding-standard/Magento2" />
+
+    <rule ref="Magento2.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="200"/>
+            <property name="absoluteLineLimit" value="0" />
+        </properties>
+    </rule>
+
+    <rule ref="MageSuite.Classes.PrivateConstructParameters">
+        <properties>
+            <property name="isEnabled" value="true" />
+        </properties>
+    </rule>
+
+    <rule ref="MageSuite.Classes.RequireFullPath">
+        <properties>
+            <property name="isEnabled" value="true" />
+        </properties>
+    </rule>
+
+    <rule ref="MageSuite.Configuration.RequireConfigurationHelper">
+        <properties>
+            <property name="isEnabled" value="true" />
+        </properties>
+    </rule>
+
+    <rule ref="MageSuite.Plugins.CorrectPath">
+        <properties>
+            <property name="isEnabled" value="true" />
+        </properties>
+    </rule>
+
+    <rule ref="MageSuite.Plugins.MissingSubjectType">
+        <properties>
+            <property name="isEnabled" value="true" />
+        </properties>
+    </rule>
+
+    <rule ref="MageSuite.TooMany.IfConditions">
+        <properties>
+            <property name="isEnabled" value="true" />
+            <property name="conditionsLimit" value="3" />
+        </properties>
+    </rule>
+
+    <rule ref="MageSuite.TooMany.IfNestedLevel">
+        <properties>
+            <property name="isEnabled" value="true" />
+            <property name="nestedLevelLimit" value="3" />
+        </properties>
+    </rule>
+
+    <rule ref="MageSuite.TooMany.MethodArguments">
+        <properties>
+            <property name="isEnabled" value="true" />
+            <property name="argumentsLimit" value="3" />
+        </properties>
+    </rule>
+</ruleset>
