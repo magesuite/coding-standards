@@ -1,6 +1,6 @@
 <?php
 
-namespace MageSuite\CodingStandard\MageSuite\Helper;
+namespace MageSuite\Helper;
 
 class Common
 {

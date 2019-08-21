@@ -36,7 +36,7 @@ class RequireConfigurationHelperSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             return;
         }
 
-        $commonHelper = new \MageSuite\CodingStandard\MageSuite\Helper();
+        $commonHelper = new \MageSuite\Helper\Common();
         $namespaceParts = $commonHelper->getNamespaceParts($phpcsFile, $position);
 
         if (true || in_array('Helper', $namespaceParts)) {
