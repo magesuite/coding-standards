@@ -43,6 +43,12 @@
         </properties>
     </rule>
 
+    <rule ref="MageSuite.Template.UnderscorePrefix">
+        <properties>
+            <property name="isEnabled" value="true" />
+        </properties>
+    </rule>
+
     <rule ref="MageSuite.TooMany.IfConditions">
         <properties>
             <property name="isEnabled" value="true" />
