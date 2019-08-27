@@ -2,8 +2,12 @@
 
 namespace Standard\Sniffs\TooMany;
 
+use PHP_CodeSniffer\Exceptions\TokenizerException;
+
 class MethodArgumentsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
+    const CONSTRUCTOR_METHOD_NAME = '__construct';
+
     public $isEnabled = true;
 
     public $argumentsLimit = 3;
@@ -19,11 +23,21 @@ class MethodArgumentsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             return;
         }
 
-        $parametersCount = count($phpcsFile->getMethodParameters($position));
+        $methodName = $phpcsFile->getDeclarationName($position);
+
+        if ($methodName == self::CONSTRUCTOR_METHOD_NAME) {
+            return;
+        }
+
+        try {
+            $parametersCount = count($phpcsFile->getMethodParameters($position));
+        } catch (TokenizerException $e) {
+            return;
+        }
 
         if ($parametersCount > $this->argumentsLimit) {
             $error = 'Too many parameters in %s() method (%s found, %s max)';
-            $data = [$phpcsFile->getDeclarationName($position), $parametersCount, $this->argumentsLimit];
+            $data = [$methodName, $parametersCount, $this->argumentsLimit];
 
             $phpcsFile->addWarning($error, $position, 'Found', $data);
         }
