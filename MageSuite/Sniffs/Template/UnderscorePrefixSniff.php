@@ -22,7 +22,7 @@ class UnderscorePrefixSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 
         if (strpos($token['content'], self::UNDERSCORE_PREFIX) === 0) {
             $error = 'Variable %s prefixed with a single underscore';
-            $phpcsFile->addWarning($error, $position, 'Found', $token['content']);
+            $phpcsFile->addWarning($error, $position, 'Found', [$token['content']]);
         }
 
     }
