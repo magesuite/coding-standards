@@ -4,6 +4,7 @@ namespace Standard\Sniffs\Configuration;
 class RequireConfigurationHelperSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     const CONSTRUCTOR_METHOD_NAME = '__construct';
+    const ACCEPTED_CLASS_NAMES = ['Configuration', 'Config'];
 
     public $isEnabled = true;
 
@@ -39,17 +40,17 @@ class RequireConfigurationHelperSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         $commonHelper = new \MageSuite\Helper\Common();
         $namespaceParts = $commonHelper->getNamespaceParts($phpcsFile, $position);
 
-        if (true || in_array('Helper', $namespaceParts)) {
-            if (in_array('Configuration', $namespaceParts)) {
-                return;
-            }
+        $isAcceptedClassInNamespace = (bool)count(array_intersect(self::ACCEPTED_CLASS_NAMES, $namespaceParts));
 
-            $classPosition = $phpcsFile->findPrevious(T_CLASS, $position);
-            $className = $phpcsFile->getDeclarationName($classPosition);
+        if ($isAcceptedClassInNamespace) {
+            return;
+        }
 
-            if ($className == 'Configuration') {
-                return;
-            }
+        $classPosition = $phpcsFile->findPrevious(T_CLASS, $position);
+        $className = $phpcsFile->getDeclarationName($classPosition);
+
+        if (in_array($className, self::ACCEPTED_CLASS_NAMES)) {
+            return;
         }
 
         $error = 'ScopeConfigInterface class should be used in separate configuration helper only';
