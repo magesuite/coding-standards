@@ -16,6 +16,15 @@ class RequireFullPathSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             return;
         }
 
-        $phpcsFile->addWarning('Don\'t import class, use fully qualified class name', $position, 'Use_Used');
+        $tokens = $phpcsFile->getTokens();
+        $tokenInformation = $tokens[$position];
+
+        $classNameTokenKey = array_search('T_CLASS', array_column($tokens, 'type'));
+        $classNameLine = $tokens[$classNameTokenKey]['line'];
+
+        if($classNameLine > $tokenInformation['line']) {
+            $phpcsFile->addWarning('Don\'t import class, use fully qualified class name', $position, 'Use_Used');
+        }
+
     }
 }
