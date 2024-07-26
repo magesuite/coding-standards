@@ -1,30 +1,27 @@
 <?php
-namespace Standard\Sniffs\Plugins;
+
+declare(strict_types=1);
+
+namespace MageSuite\Sniffs\Plugins;
 
 class MissingSubjectTypeSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
-    public $isEnabled = true;
-
-    protected $pluginMethodPrefixes = ['before', 'after', 'around'];
+    protected array $pluginMethodPrefixes = ['before', 'after', 'around'];
 
     public function register()
     {
         return [T_FUNCTION];
     }
 
-    public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $position)
+    public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
     {
-        if (!$this->isEnabled) {
-            return;
-        }
-
         $filePath = $phpcsFile->getFilename();
 
         if (strpos($filePath, '/Plugin/') === false) {
             return;
         }
 
-        $methodName = $phpcsFile->getDeclarationName($position);
+        $methodName = $phpcsFile->getDeclarationName($stackPtr);
 
         $pluginMethod = false;
         foreach ($this->pluginMethodPrefixes as $pluginMethodPrefix) {
@@ -39,7 +36,7 @@ class MissingSubjectTypeSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             return;
         }
 
-        $parameters = $phpcsFile->getMethodParameters($position);
+        $parameters = $phpcsFile->getMethodParameters($stackPtr);
 
         if (empty($parameters)) {
             return;
@@ -47,7 +44,7 @@ class MissingSubjectTypeSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 
         if (empty($parameters[0]['type_hint'])) {
             $error = 'Missing type for %s argument';
-            $phpcsFile->addWarning($error, $position, 'Found', [$parameters[0]['name']]);
+            $phpcsFile->addWarning($error, $stackPtr, 'Found', [$parameters[0]['name']]);
         }
 
 

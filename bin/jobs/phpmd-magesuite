@@ -1,0 +1,13 @@
+#!/bin/bash
+printf "\033[34mPHP Mess Detector for MageSuite\033[00m"
+printf "\n\n"
+
+GITDIFFFILE=$(mktemp)
+( cd $1 && git diff origin/HEAD --diff-filter=d '*.php' > $GITDIFFFILE ) >> /dev/null
+
+PHPMDFILE=$(mktemp)
+changed_files=$(cd $1 && git diff origin/HEAD --name-only --diff-filter=d '*.php' ':!*Test.php' | sed -e "s#^#$2/$1#g" | awk '{print}' ORS=',' | sed 's/,$/\n/')
+
+$2/vendor/bin/phpmd $changed_files xml $2/vendor/creativestyle/magesuite-coding-standards/phpmd.xml > $PHPMDFILE || true
+
+$2/vendor/bin/diffFilter --phpmdStrict $GITDIFFFILE $PHPMDFILE

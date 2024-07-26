@@ -1,39 +1,33 @@
 <?php
 
-namespace Standard\Sniffs\TooMany;
+declare(strict_types=1);
 
-use PHP_CodeSniffer\Exceptions\TokenizerException;
+namespace MageSuite\Sniffs\TooMany;
 
 class MethodArgumentsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
-    const CONSTRUCTOR_METHOD_NAME = '__construct';
+    public const CONSTRUCTOR_METHOD_NAME = '__construct';
 
-    public $isEnabled = true;
+    public int $argumentsLimit = 3;
 
-    public $argumentsLimit = 3;
-
-    protected $pluginPrefixes = ['before', 'after', 'around'];
+    protected array $pluginPrefixes = ['before', 'after', 'around'];
 
     public function register()
     {
         return [T_FUNCTION];
     }
 
-    public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $position)
+    public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
     {
-        if (!$this->isEnabled) {
-            return;
-        }
-
-        $methodName = $phpcsFile->getDeclarationName($position);
+        $methodName = $phpcsFile->getDeclarationName($stackPtr);
 
         if ($methodName == self::CONSTRUCTOR_METHOD_NAME) {
             return;
         }
 
         try {
-            $parametersCount = count($phpcsFile->getMethodParameters($position));
-        } catch (TokenizerException $e) {
+            $parametersCount = count($phpcsFile->getMethodParameters($stackPtr));
+        } catch (\PHP_CodeSniffer\Exceptions\TokenizerException $e) {
             return;
         }
 
@@ -46,7 +40,7 @@ class MethodArgumentsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             $error = 'Too many parameters in %s() method (%s found, %s max)';
             $data = [$methodName, $parametersCount, $this->argumentsLimit];
 
-            $phpcsFile->addWarning($error, $position, 'Found', $data);
+            $phpcsFile->addWarning($error, $stackPtr, 'Found', $data);
         }
     }
 

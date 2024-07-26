@@ -1,33 +1,29 @@
 <?php
 
-namespace Standard\Sniffs\TooMany;
+declare(strict_types=1);
+
+namespace MageSuite\Sniffs\TooMany;
 
 class IfNestedLevelSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
-    public $isEnabled = true;
-
-    public $nestedLevelLimit = 3;
+    public int $nestedLevelLimit = 3;
 
     public function register()
     {
         return [T_IF];
     }
 
-    public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $position)
+    public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
     {
-        if (!$this->isEnabled) {
-            return;
-        }
-
         $tokens = $phpcsFile->getTokens();
 
-        $level = --$tokens[$position]['level'];
+        $level = --$tokens[$stackPtr]['level'];
 
         if ($level > $this->nestedLevelLimit) {
             $error = 'IF statement too nested (%s level, %s max)';
             $data = [$level, $this->nestedLevelLimit];
 
-            $phpcsFile->addWarning($error, $position, 'Found', $data);
+            $phpcsFile->addWarning($error, $stackPtr, 'Found', $data);
 
         }
     }
