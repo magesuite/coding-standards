@@ -1,0 +1,13 @@
+#!/bin/bash
+printf "\033[34mPHP Code Sniffer\033[00m"
+printf "\n\n"
+
+TMPFILE=$(mktemp)
+( cd $1 && git diff origin/HEAD --name-only --diff-filter=d '*.php' > "$TMPFILE" ) >> /dev/null
+
+echo "Changed files:"
+cat $TMPFILE
+
+sed -i -e "s#^#$2/$1#g" $TMPFILE
+
+$2/vendor/bin/phpcs --standard=$2/vendor/creativestyle/magesuite-coding-standards/MageSuite --file-list=$TMPFILE

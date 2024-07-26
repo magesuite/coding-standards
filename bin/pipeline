@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ "$1" == *"magesuite"* ]]; then
+    jobs=(phpcpd phpcs-magesuite phpmd-magesuite)
+else
+    jobs=(phpcpd phpcs phpmd)
+fi
+printf $jobs
+printf "\n"
+echo "--------------------------------------------------------------------------------"
+printf "Running MageSuite Coding Standards pipeline."
+printf "\n"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+ROOT_DIR="$SCRIPT_DIR/../../../../"
+
+for script in "${jobs[@]}"
+do
+    echo "--------------------------------------------------------------------------------"
+    printf "\n"
+    $ROOT_DIR/vendor/creativestyle/magesuite-coding-standards/bin/jobs/$script $1 $ROOT_DIR
+    printf "\n"
+done
+
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+printf "\033[34mPHP Copy Paste Detector\033[00m"
+printf "\n\n"
+
+$2/vendor/bin/phpcpd $1 --exclude="$1/Test"

@@ -4,69 +4,55 @@
     <description>Custom MageSuite coding standard.</description>
     <exclude-pattern>vendor\/(?!creativestyle\/).*</exclude-pattern>
 
-    <rule ref="../../../../vendor/magento/magento-coding-standard/Magento2" />
+    <rule ref="PSR12"/>
 
-    <rule ref="Magento2.Files.LineLength">
+    <rule ref="Magento2">
+        <exclude name="Magento2.Annotation.MethodArguments.NoCommentBlock"/>
+        <exclude name="Magento2.Annotation.MethodAnnotationStructure.MethodArguments"/>
+        <exclude name="Magento2.Annotation.MethodAnnotationStructure.MethodAnnotation"/>
+        <exclude name="Magento2.Commenting.ClassPropertyPHPDocFormatting"/>
+        <exclude name="Magento2.Html.HtmlClosingVoidTags.HtmlClosingVoidElements"/>
+        <exclude name="Magento2.Html.HtmlSelfClosingTags.HtmlSelfClosingNonVoidTag"/>
+        <exclude name="Magento2.Html.HtmlSelfClosingTags.HtmlSelfClosingNonVoidTag"/>
+    </rule>
+
+    <rule ref="Squiz">
+        <exclude name="Squiz"/>
+    </rule>
+
+    <rule ref="PSR1">
+        <exclude name="PSR1"/>
+    </rule>
+
+    <rule ref="PSR2">
+        <exclude name="PSR2"/>
+    </rule>
+
+    <rule ref="Generic.Files.LineLength">
         <properties>
-            <property name="lineLimit" value="200"/>
-            <property name="absoluteLineLimit" value="0" />
+            <property name="lineLimit" value="160"/>
+            <property name="absoluteLineLimit" value="0"/>
         </properties>
     </rule>
 
-    <rule ref="MageSuite.Classes.PrivateConstructParameters">
-        <properties>
-            <property name="isEnabled" value="true" />
-        </properties>
+    <rule ref="Generic.CodeAnalysis">
+        <exclude name="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
     </rule>
 
-    <rule ref="MageSuite.Classes.RequireFullPath">
-        <properties>
-            <property name="isEnabled" value="true" />
-        </properties>
+    <rule ref="SlevomatCodingStandard.TypeHints">
+        <exclude name="SlevomatCodingStandard.TypeHints.DisallowArrayTypeHintSyntax"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification"/>
     </rule>
 
-    <rule ref="MageSuite.Configuration.RequireConfigurationHelper">
-        <properties>
-            <property name="isEnabled" value="true" />
-        </properties>
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing">
+        <exclude-pattern>*.xml</exclude-pattern>
+        <exclude-pattern>*.phtml</exclude-pattern>
     </rule>
 
-    <rule ref="MageSuite.Plugins.CorrectPath">
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <properties>
-            <property name="isEnabled" value="true" />
-        </properties>
-    </rule>
-
-    <rule ref="MageSuite.Plugins.MissingSubjectType">
-        <properties>
-            <property name="isEnabled" value="true" />
-        </properties>
-    </rule>
-
-    <rule ref="MageSuite.Template.UnderscorePrefix">
-        <properties>
-            <property name="isEnabled" value="true" />
-        </properties>
-    </rule>
-
-    <rule ref="MageSuite.TooMany.IfConditions">
-        <properties>
-            <property name="isEnabled" value="true" />
-            <property name="conditionsLimit" value="3" />
-        </properties>
-    </rule>
-
-    <rule ref="MageSuite.TooMany.IfNestedLevel">
-        <properties>
-            <property name="isEnabled" value="true" />
-            <property name="nestedLevelLimit" value="3" />
-        </properties>
-    </rule>
-
-    <rule ref="MageSuite.TooMany.MethodArguments">
-        <properties>
-            <property name="isEnabled" value="true" />
-            <property name="argumentsLimit" value="3" />
+            <property name="spacesCountAroundEqualsSign">0</property>
         </properties>
     </rule>
 </ruleset>

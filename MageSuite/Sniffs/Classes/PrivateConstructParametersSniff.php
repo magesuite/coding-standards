@@ -1,29 +1,26 @@
 <?php
-namespace Standard\Sniffs\Classes;
+
+declare(strict_types=1);
+
+namespace MageSuite\Sniffs\Classes;
 
 class PrivateConstructParametersSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     const CONSTRUCTOR_METHOD_NAME = '__construct';
-
-    public $isEnabled = true;
 
     public function register()
     {
         return [T_FUNCTION];
     }
 
-    public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $position)
+    public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
     {
-        if (!$this->isEnabled) {
+        if ($phpcsFile->getDeclarationName($stackPtr) != self::CONSTRUCTOR_METHOD_NAME) {
             return;
         }
 
-        if ($phpcsFile->getDeclarationName($position) != self::CONSTRUCTOR_METHOD_NAME) {
-            return;
-        }
-
-        $next = $phpcsFile->findPrevious([T_OPEN_CURLY_BRACKET], $position);
-        $end = $position;
+        $next = $phpcsFile->findPrevious([T_OPEN_CURLY_BRACKET], $stackPtr);
+        $end = $stackPtr;
 
         $tokens = $phpcsFile->getTokens();
 
@@ -37,6 +34,4 @@ class PrivateConstructParametersSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             $phpcsFile->addWarning($error, $next, 'Found');
         }
     }
-
-
 }
