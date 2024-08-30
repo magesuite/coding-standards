@@ -8,6 +8,7 @@
 
     <rule ref="Magento2">
         <exclude name="Magento2.Annotation.MethodArguments.NoCommentBlock"/>
+        <exclude name="Magento2.Annotation.MethodArguments.ParamMissing"/>
         <exclude name="Magento2.Annotation.MethodAnnotationStructure.MethodArguments"/>
         <exclude name="Magento2.Annotation.MethodAnnotationStructure.MethodAnnotation"/>
         <exclude name="Magento2.Commenting.ClassPropertyPHPDocFormatting"/>
