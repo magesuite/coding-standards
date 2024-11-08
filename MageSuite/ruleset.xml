@@ -4,6 +4,7 @@
     <description>Custom MageSuite coding standard.</description>
     <exclude-pattern>vendor\/(?!creativestyle\/).*</exclude-pattern>
 
+    <rule ref="../../../../vendor/magento/magento-coding-standard/Magento2" />
     <rule ref="PSR12"/>
 
     <rule ref="Magento2">
@@ -11,10 +12,17 @@
         <exclude name="Magento2.Annotation.MethodArguments.ParamMissing"/>
         <exclude name="Magento2.Annotation.MethodAnnotationStructure.MethodArguments"/>
         <exclude name="Magento2.Annotation.MethodAnnotationStructure.MethodAnnotation"/>
-        <exclude name="Magento2.Commenting.ClassPropertyPHPDocFormatting"/>
         <exclude name="Magento2.Html.HtmlClosingVoidTags.HtmlClosingVoidElements"/>
         <exclude name="Magento2.Html.HtmlSelfClosingTags.HtmlSelfClosingNonVoidTag"/>
         <exclude name="Magento2.Html.HtmlSelfClosingTags.HtmlSelfClosingNonVoidTag"/>
+        <exclude name="Magento2.Translation.ConstantUsage"/>
+    </rule>
+
+    <rule ref="Magento2.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="200"/>
+            <property name="absoluteLineLimit" value="0" />
+        </properties>
     </rule>
 
     <rule ref="Squiz">
@@ -38,7 +46,8 @@
 
     <rule ref="Generic.CodeAnalysis">
         <exclude name="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
-        <exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed"/>
+        <exclude name="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+        <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCatch"/>
     </rule>
 
     <rule ref="SlevomatCodingStandard.TypeHints">
@@ -51,6 +60,11 @@
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing">
         <exclude-pattern>*.xml</exclude-pattern>
         <exclude-pattern>*.phtml</exclude-pattern>
+    </rule>
+
+
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
+        <exclude-pattern>/Plugin/</exclude-pattern>
     </rule>
 
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
