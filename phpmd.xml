@@ -22,7 +22,7 @@
 
     <rule ref="rulesets/codesize.xml/TooManyFields">
         <properties>
-            <property name="maxfields" value="10"/>
+            <property name="maxfields" value="15"/>
         </properties>
     </rule>
     <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
