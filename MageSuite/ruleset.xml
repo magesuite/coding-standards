@@ -3,7 +3,7 @@
 <ruleset name="MageSuite">
     <description>Custom MageSuite coding standard.</description>
     <exclude-pattern>vendor\/(?!creativestyle\/).*</exclude-pattern>
-    
+
     <rule ref="PSR12"/>
 
     <rule ref="Magento2">
@@ -54,10 +54,9 @@
     </rule>
 
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing">
-        <exclude-pattern>*.xml</exclude-pattern>
-        <exclude-pattern>*.phtml</exclude-pattern>
+        <exclude-pattern>*\.xml$</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
     </rule>
-
 
     <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
         <exclude-pattern>/Plugin/</exclude-pattern>
@@ -71,5 +70,18 @@
         <properties>
             <property name="spacesCountAroundEqualsSign">0</property>
         </properties>
+    </rule>
+
+    <rule ref="PSR12.Files.FileHeader.SpacingAfterBlock">
+        <exclude-pattern>*\.xml$</exclude-pattern>
+        <exclude-pattern>*\.phtml$</exclude-pattern>
+    </rule>
+
+    <rule ref="PSR12.Operators.OperatorSpacing.NoSpaceBefore">
+        <exclude-pattern>*\.xml$</exclude-pattern>
+    </rule>
+
+    <rule ref="PSR12.Operators.OperatorSpacing.NoSpaceAfter">
+        <exclude-pattern>*\.xml$</exclude-pattern>
     </rule>
 </ruleset>
