@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MageSuite\Sniffs\Plugins;
+namespace MageSuite\Sniffs\Template;
 
 class UnderscorePrefixSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
