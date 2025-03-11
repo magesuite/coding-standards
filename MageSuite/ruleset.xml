@@ -68,7 +68,7 @@
 
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <properties>
-            <property name="spacesCountAroundEqualsSign">0</property>
+            <property name="spacesCountAroundEqualsSign" value="0"/>
         </properties>
     </rule>
 
