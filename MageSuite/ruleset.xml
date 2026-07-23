@@ -87,15 +87,6 @@
     </rule>
 
     <rule ref="PHPCompatibility">
-        <exclude name="Magento2.Annotation.MethodAnnotationStructure.NoCommentBlock"/>
-        <exclude name="Magento2.Annotation.MethodArguments.NoCommentBlock"/>
-        <exclude name="Magento2.Annotation.MethodArguments.ParamMissing"/>
-        <exclude name="Magento2.Annotation.MethodAnnotationStructure.MethodArguments"/>
-        <exclude name="Magento2.Annotation.MethodAnnotationStructure.MethodAnnotation"/>
-        <exclude name="Magento2.Html.HtmlClosingVoidTags.HtmlClosingVoidElements"/>
-        <exclude name="Magento2.Html.HtmlSelfClosingTags.HtmlSelfClosingNonVoidTag"/>
-        <exclude name="Magento2.Html.HtmlSelfClosingTags.HtmlSelfClosingNonVoidTag"/>
-        <exclude name="Magento2.Translation.ConstantUsage"/>
-        <exclude name="Magento2.Commenting.ClassPropertyPHPDocFormatting.Missing"/>
+        <exclude name="PHPCompatibility.FunctionDeclarations.NewReturnTypeDeclarations.trueFound"/>
     </rule>
 </ruleset>
